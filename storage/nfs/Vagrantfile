@@ -1,0 +1,23 @@
+file_to_disk="/tmp/disk8.img"
+Vagrant.configure("2") do |config|
+  config.vm.define "nfs_server" do |nfs_server|
+    nfs_server.vm.provider "virtualbox" do |this_vm|
+      this_vm.gui = false
+      this_vm.cpus = 2
+      this_vm.name = "nfs_server"
+      this_vm.memory = "1024"
+    end
+    nfs_server.vm.box = "centos/8"
+    nfs_server.vm.network "private_network", ip: "192.168.10.101"
+  end
+  config.vm.define "nfs_client" do |nfs_client|
+    nfs_client.vm.provider "virtualbox" do |this_vm|
+      this_vm.gui = false
+      this_vm.cpus = 2
+      this_vm.name = "nfs_client"
+      this_vm.memory = "1024"
+    end
+    nfs_client.vm.box = "centos/8"
+    nfs_client.vm.network "private_network", ip: "192.168.10.102"
+  end
+end
