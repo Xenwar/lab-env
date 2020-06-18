@@ -1,0 +1,32 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "firewallclient" do |firewallclient|
+    firewallclient.vm.provider "virtualbox" do |this_vm|
+      this_vm.gui = false
+      this_vm.cpus = 2
+      this_vm.name = "firewallclient"
+      this_vm.memory = "1024"
+    end
+    firewallclient.vm.box = "centos/8"
+    firewallclient.vm.network "private_network", ip: "192.168.14.101"
+  end
+  config.vm.define "firewallrouter" do |firewallrouter|
+    firewallrouter.vm.provider "virtualbox" do |this_vm|
+      this_vm.gui = false
+      this_vm.cpus = 2
+      this_vm.name = "firewallrouter"
+      this_vm.memory = "1024"
+    end
+    firewallrouter.vm.box = "centos/8"
+    firewallrouter.vm.network "private_network", ip: "192.168.14.102"
+  end
+  config.vm.define "firewalledservice" do |firewalledservice|
+    firewalledservice.vm.provider "virtualbox" do |this_vm|
+      this_vm.gui = false
+      this_vm.cpus = 2
+      this_vm.name = "firewalledservice"
+      this_vm.memory = "1024"
+    end
+    firewalledservice.vm.box = "centos/8"
+    firewalledservice.vm.network "private_network", ip: "192.168.14.103"
+  end
+end
